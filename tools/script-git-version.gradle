@@ -1,23 +1,26 @@
-buildscript {
-    repositories {
-        jcenter()
+def getVersionName = { ->
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe', '--dirty'
+            standardOutput = stdout
+        }
+        return stdout.toString().trim()
     }
-    dependencies {
-        classpath 'org.ajoberstar:grgit:1.5.0'
+    catch (ignored) {
+        return null;
     }
 }
-
-import org.ajoberstar.grgit.Grgit
-
-ext {
-    git = Grgit.open(currentDir: projectDir)
-    gitVersionName = git.describe()
-    gitVersionCode = git.tag.list().size()
-    gitVersionCodeTime = git.head().time
-}
-
-task printVersion() {
-    println("Version Name: $gitVersionName")
-    println("Version Code: $gitVersionCode")
-    println("Version Code Time: $gitVersionCodeTime")
+def getVersionCode = { ->
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', '--first-parent', '--count', 'origin/master'
+            standardOutput = stdout
+        }
+        return Integer.parseInt(stdout.toString().trim()) * 100
+    }
+    catch (ignored) {
+        return -1;
+    }
 }

@@ -4,29 +4,19 @@ apply from: "$project.rootDir/tools/script-git-version.gradle"
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
+
     defaultConfig {
         applicationId "pancor.pl.clothy"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode getVersionCode()
+        versionName getVersionName()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    productFlavors {
-        dev {
-            versionCode gitVersionCodeTime
-            versionName gitVersionName
-        }
-
-        prod {
-            versionCode gitVersionCode
-            versionName gitVersionName
         }
     }
 }
