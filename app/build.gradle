@@ -9,8 +9,8 @@ android {
         applicationId "pancor.pl.clothy"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode getVersionCode()
-        versionName getVersionName()
+        versionCode getVersionCodeApp()
+        versionName getVersionNameApp()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
