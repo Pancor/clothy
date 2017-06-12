@@ -22,7 +22,8 @@ android {
 }
 
 ext {
-    dagger = '2.8';
+    dagger = '2.8'
+    butterKnife = '8.5.1'
 }
 
 dependencies {
@@ -39,4 +40,8 @@ dependencies {
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
     compile "com.google.dagger:dagger:$dagger"
+
+    //butterKnife
+    compile "com.jakewharton:butterknife:$butterKnife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnife"
 }

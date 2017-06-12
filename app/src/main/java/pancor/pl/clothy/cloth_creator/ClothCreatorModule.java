@@ -1,5 +1,7 @@
 package pancor.pl.clothy.cloth_creator;
 
+import android.support.annotation.NonNull;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -8,7 +10,7 @@ public class ClothCreatorModule {
 
     private ClothCreator.View view;
 
-    public ClothCreatorModule(ClothCreator.View view){
+    public ClothCreatorModule(@NonNull ClothCreator.View view){
         this.view = view;
     }
 
