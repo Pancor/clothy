@@ -2,7 +2,6 @@ package pancor.pl.clothy.cloth_creator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -15,7 +14,7 @@ public class ClothCreatorActivity extends AppCompatActivity implements ClothCrea
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_cloth_creator);
 
         DaggerClothCreatorComponent.builder()
                 .clothCreatorModule(new ClothCreatorModule(this))
