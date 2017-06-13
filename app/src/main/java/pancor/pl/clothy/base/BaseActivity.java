@@ -1,6 +1,5 @@
 package pancor.pl.clothy.base;
 
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
