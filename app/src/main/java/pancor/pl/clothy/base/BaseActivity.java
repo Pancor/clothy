@@ -76,6 +76,7 @@ public class BaseActivity extends AppCompatActivity implements
     private void setupToolbar(){
         if (toolbar != null) {
             setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle("");
         } else {
             Log.w(TAG, "Couldn't set toolbar");
         }

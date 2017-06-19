@@ -34,7 +34,6 @@ public class StepperView extends View {
     }
 
     public void setFirstItem(){
-
         isFirstItem = true;
         invalidate();
     }
@@ -83,6 +82,4 @@ public class StepperView extends View {
         path.close();
         canvas.drawPath(path, paint);
     }
-
-
 }
