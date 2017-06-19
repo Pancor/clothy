@@ -11,8 +11,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,24 +82,34 @@ public class BaseActivity extends AppCompatActivity implements
     }
 
     private void setupDrawerLayout(){
-        if (drawerLayout != null){
+        if (toolbar != null && drawerLayout != null){
             actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                    toolbar, R.string.drawer_open, R.string.drawer_closed){
-
-                @Override
-                public void onDrawerOpened(View drawerView) {
-                    super.onDrawerOpened(drawerView);
-                }
-
-                @Override
-                public void onDrawerClosed(View drawerView) {
-                    super.onDrawerClosed(drawerView);
-                }
-            };
+                    toolbar, R.string.drawer_open, R.string.drawer_closed);
             drawerLayout.addDrawerListener(actionBarDrawerToggle);
+            setupCustomMenuIcon();
+            setupBucketIcon();
             actionBarDrawerToggle.syncState();
         } else {
             Log.w(TAG, "Couldn't set drawer layout");
         }
+    }
+
+    private void setupCustomMenuIcon(){
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
+        actionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.menu_icon);
+        actionBarDrawerToggle.setToolbarNavigationClickListener(view ->{
+            if (drawerLayout.isDrawerOpen(Gravity.START)){
+                drawerLayout.closeDrawer(Gravity.START);
+            } else {
+                drawerLayout.openDrawer(Gravity.START);
+            }
+        });
+    }
+
+    private void setupBucketIcon(){
+        ImageView bucketIcon = (ImageView) toolbar.findViewById(R.id.bucket);
+        Glide.with(this)
+                .load(R.drawable.shop_icon)
+                .into(bucketIcon);
     }
 }

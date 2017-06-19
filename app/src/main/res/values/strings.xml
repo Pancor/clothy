@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Clothy</string>
+    <string name="app_name_caps">CLOTHY</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_closed">Closed</string>
+    <string name="bucket">Bucket</string>
 </resources>

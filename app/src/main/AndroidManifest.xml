@@ -20,5 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="pancor.pl.clothy.conf.GlideConfiguration"
+            android:value="GlideModule"/>
     </application>
 </manifest>
