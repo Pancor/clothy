@@ -1,13 +1,15 @@
 package pancor.pl.clothy.cloth_creator;
 
 
-public interface ClothCreator {
+interface ClothCreator {
 
     interface View {
 
+        void goToGivenStep(int givenStep);
     }
 
     interface Presenter {
 
+        void goToGivenStepIfPossible(int givenStep);
     }
 }

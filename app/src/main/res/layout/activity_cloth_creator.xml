@@ -35,7 +35,8 @@
                     android:id="@+id/bucket"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_margin="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_gravity="center_vertical|end"/>
                 </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>

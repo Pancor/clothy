@@ -2,14 +2,14 @@ package pancor.pl.clothy.cloth_creator;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import javax.inject.Inject;
@@ -22,14 +22,18 @@ import pancor.pl.clothy.cloth_creator.steps.FirstStepFragment;
 import pancor.pl.clothy.cloth_creator.steps.SecondStepFragment;
 import pancor.pl.clothy.cloth_creator.steps.ThirdStepFragment;
 import pancor.pl.clothy.utils.ui.recycler.SpaceItemDecoration;
+import pancor.pl.clothy.utils.ui.stepper.Stepper;
 import pancor.pl.clothy.utils.ui.stepper.StepperAdapter;
 
-public class ClothCreatorActivity extends BaseActivity implements ClothCreator.View {
+public class ClothCreatorActivity extends BaseActivity implements ClothCreator.View,
+        Stepper {
 
     private static final int DISTANCE_BETWEEN_STEPPER_ITEMS_IN_DP = 8;
     private static final int STEPPER_ITEMS = 3;
 
     @Inject ClothCreatorPresenter presenter;
+
+    private SteppersPagerAdapter pagerAdapter;
 
     @BindView(R.id.stepper) protected RecyclerView stepperRecyclerView;
     @BindView(R.id.viewPager) protected ViewPager containerViewPager;
@@ -51,6 +55,11 @@ public class ClothCreatorActivity extends BaseActivity implements ClothCreator.V
                 .build().inject(this);
     }
 
+    private void setupContainerViewPager(){
+        pagerAdapter = new SteppersPagerAdapter(getSupportFragmentManager());
+        containerViewPager.setAdapter(pagerAdapter);
+    }
+
     private void setupStepperView(){
         stepperRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager
@@ -59,16 +68,21 @@ public class ClothCreatorActivity extends BaseActivity implements ClothCreator.V
         RecyclerView.ItemDecoration itemDecoration =
                 new SpaceItemDecoration(DISTANCE_BETWEEN_STEPPER_ITEMS_IN_DP);
         stepperRecyclerView.addItemDecoration(itemDecoration);
-        stepperRecyclerView.setAdapter(new StepperAdapter(STEPPER_ITEMS));
+        stepperRecyclerView.setAdapter(new StepperAdapter(this, getResources(), STEPPER_ITEMS));
     }
 
-    private void setupContainerViewPager(){
-
-        PagerAdapter pagerAdapter = new SteppersPagerAdapter(getSupportFragmentManager());
-        containerViewPager.setAdapter(pagerAdapter);
+    @Override
+    public void onStepperItemClick(int position) {
+        presenter.goToGivenStepIfPossible(position);
     }
 
-    private class SteppersPagerAdapter extends FragmentStatePagerAdapter {
+    @Override
+    public void goToGivenStep(int givenStep) {
+        containerViewPager.setCurrentItem(givenStep, true);
+        stepperRecyclerView.smoothScrollToPosition(givenStep);
+    }
+
+    private class SteppersPagerAdapter extends FragmentPagerAdapter {
 
         private SteppersPagerAdapter(FragmentManager fm) {
             super(fm);

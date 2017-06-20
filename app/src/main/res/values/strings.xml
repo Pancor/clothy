@@ -4,4 +4,10 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_closed">Closed</string>
     <string name="bucket">Bucket</string>
+
+    <string-array name="cloth_creator_steps">
+        <item>CHOOSE CUT</item>
+        <item>CHOOSE COLOURS</item>
+        <item>CHOOSE COLOURS</item>
+    </string-array>
 </resources>

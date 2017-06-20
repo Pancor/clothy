@@ -13,4 +13,9 @@ public class ClothCreatorPresenter implements ClothCreator.Presenter {
     public ClothCreatorPresenter(ClothCreator.View view){
         this.view = view;
     }
+
+    @Override
+    public void goToGivenStepIfPossible(int givenStep) {
+        view.goToGivenStep(givenStep);
+    }
 }
