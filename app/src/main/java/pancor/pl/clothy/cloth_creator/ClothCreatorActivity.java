@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
 import javax.inject.Inject;
 
@@ -37,6 +38,7 @@ public class ClothCreatorActivity extends BaseActivity implements ClothCreator.V
 
     @BindView(R.id.stepper) protected RecyclerView stepperRecyclerView;
     @BindView(R.id.viewPager) protected ViewPager containerViewPager;
+    @BindView(R.id.clothImage) protected ImageView clothImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class ClothCreatorActivity extends BaseActivity implements ClothCreator.V
         setupInjection();
         setupStepperView();
         setupContainerViewPager();
+        presenter.getClothData();
     }
 
     private void setupInjection(){

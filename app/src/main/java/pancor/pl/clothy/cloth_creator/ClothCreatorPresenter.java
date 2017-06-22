@@ -15,6 +15,11 @@ public class ClothCreatorPresenter implements ClothCreator.Presenter {
     }
 
     @Override
+    public void getClothData() {
+
+    }
+
+    @Override
     public void goToGivenStepIfPossible(int givenStep) {
         view.goToGivenStep(givenStep);
     }

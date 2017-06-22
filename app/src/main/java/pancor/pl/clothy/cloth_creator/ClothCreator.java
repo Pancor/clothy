@@ -10,6 +10,8 @@ interface ClothCreator {
 
     interface Presenter {
 
+        void getClothData();
+
         void goToGivenStepIfPossible(int givenStep);
     }
 }
