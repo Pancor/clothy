@@ -1,9 +1,9 @@
 package pancor.pl.clothy.data.remote;
 
-
 import javax.inject.Inject;
 
-public class RemoteClothData {
+import pancor.pl.clothy.data.ClothData;
 
+public class RemoteClothData implements ClothData{
 
 }

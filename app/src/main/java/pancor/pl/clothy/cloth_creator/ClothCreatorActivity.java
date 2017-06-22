@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pancor.pl.clothy.R;
+import pancor.pl.clothy.base.App;
 import pancor.pl.clothy.base.BaseActivity;
 import pancor.pl.clothy.cloth_creator.steps.FirstStepFragment;
 import pancor.pl.clothy.cloth_creator.steps.SecondStepFragment;
@@ -54,6 +55,7 @@ public class ClothCreatorActivity extends BaseActivity implements ClothCreator.V
     private void setupInjection(){
         ButterKnife.bind(this);
         DaggerClothCreatorComponent.builder()
+                .clothDataComponent(((App)getApplication()).getClothDataComponent())
                 .clothCreatorModule(new ClothCreatorModule(this))
                 .build().inject(this);
     }
