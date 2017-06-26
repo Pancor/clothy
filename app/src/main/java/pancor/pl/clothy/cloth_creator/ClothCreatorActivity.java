@@ -15,6 +15,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -32,14 +37,14 @@ import pancor.pl.clothy.utils.ui.stepper.Stepper;
 import pancor.pl.clothy.utils.ui.stepper.StepperAdapter;
 
 public class ClothCreatorActivity extends BaseActivity implements ClothCreator.View,
-        Stepper {
+        Stepper, FirstStepFragment.FirstStep {
 
     private static final int DISTANCE_BETWEEN_STEPPER_ITEMS_IN_DP = 8;
     private static final int STEPPER_ITEMS = 3;
 
     @Inject ClothCreatorPresenter presenter;
 
-    private SteppersPagerAdapter pagerAdapter;
+    @Nullable private Cloth clothOptions;
 
     @BindView(R.id.stepper) protected RecyclerView stepperRecyclerView;
     @BindView(R.id.viewPager) protected ViewPager containerViewPager;
@@ -67,7 +72,7 @@ public class ClothCreatorActivity extends BaseActivity implements ClothCreator.V
     }
 
     private void setupContainerViewPager(){
-        pagerAdapter = new SteppersPagerAdapter(getSupportFragmentManager());
+        SteppersPagerAdapter pagerAdapter = new SteppersPagerAdapter(getSupportFragmentManager());
         containerViewPager.setAdapter(pagerAdapter);
     }
 
@@ -95,7 +100,7 @@ public class ClothCreatorActivity extends BaseActivity implements ClothCreator.V
 
     @Override
     public void onClothLoaded(@NonNull Cloth cloth) {
-
+        clothOptions = cloth;
     }
 
     @Override
@@ -113,6 +118,17 @@ public class ClothCreatorActivity extends BaseActivity implements ClothCreator.V
     public void hideLoadingIndicator() {
         creatorLayout.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setClothSize(int size){
+        if (clothOptions != null){
+            List<Integer> sizes = clothOptions.getSizes();
+            int clothSize = sizes.get(size);
+            Glide.with(this)
+                    .load(clothSize)
+                    .into(clothImage);
+        }
     }
 
     private class SteppersPagerAdapter extends FragmentPagerAdapter {
